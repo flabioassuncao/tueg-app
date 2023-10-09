@@ -21,4 +21,4 @@ COPY --from=build /usr/local/app/docs/index.html /usr/share/nginx/html/404.html
 COPY nginx-custom.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80
-EXPOSE 3000
+EXPOSE 80
