@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="row g-8">
+        <div class="col-md-12">
+            <br />
+            <h2 class="mb-4">Adicionar acompanhante</h2>
+            <form [formGroup]="companionForm" (ngSubmit)="onSubmit()">
+                <div class="row g-4">
+                    
+                    <div class="col-sm-6">
+                        <label for="firstName" class="form-label">Nome e sobrenome</label>
+                        <input type="text" class="form-control" formControlName="name" required/>
+                    </div>
+                    
+                    <div class="col-sm-6">
+                        <label for="firstName" class="form-label" style="margin-bottom: 1.2rem;">Tipo de atendimento</label>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-check form-check-inline">
+                                  <input type="radio" class="form-check-input" formControlName="typeOfService" value="1" />
+                                  <label class="form-check-label">Passe</label>
+                                </div>
+            
+                                <div class="form-check form-check-inline">
+                                    <input  type="radio" class="form-check-input" formControlName="typeOfService" value="2"/>
+                                    <label class="form-check-label">Consulta</label>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <br />
+                      <br />
+                      <div class="col-sm-6 justify-content-md-end"></div>
+                      <div class="col-sm-6 justify-content-md-end">
+                        <button mat-dialog-close style="margin-right: 10%;" class="btn btn-outline-danger btn-sm">Cancelar</button>
+                        <button class="btn btn-outline-dark btn-sm" type="submit">Adicionar</button>
+                      </div>
+                  </div>
+                 
+                  <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button mat-dialog-close class="w-25 btn btn-outline-danger btn-sm">Cancelar</button>
+                    <button class="w-25 btn btn-outline-dark btn-sm" type="submit">Adicionar</button>
+                  </div> -->
+            </form>
+            <br />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,134 @@
+<div style="margin-top: 5%;" class="container">
+    <main>
+      <div class="py-5 text-center">
+        <img
+          class="d-block mx-auto"
+          src="../assets/tueg_img.png"
+          alt=""
+          width="25%"
+        />
+        <h2>Agendamento - {{gira.name}} {{gira.startDate | date :'dd/MM HH:mm'}} - {{gira.endDate | date :'HH:mm'}}</h2>
+        <p class="lead" style="font-size: 1rem">
+          A marcação será obrigatoriamente feita por meio desse formulario, até às
+          12:00h do dia anterior ao trabalho. É obrigatória para todos os
+          trabalhos, com exceção da Gira de Esquerda (apenas mediante indicação
+          prévia da casa). Presença sujeita a confirmação mediante a lotação do
+          espaço.
+        </p>
+      </div>
+  
+      <div class="row g-8">
+
+        <div *ngIf="alertMessage" class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Verifique os dados inseridos!</h4>
+            <p class="mb-0" *ngFor="let error of errors">{{error}}</p>
+          </div>
+          
+        <div class="col-md-12">
+          <h4 class="mb-3">Marcação de Presença</h4>
+          <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+            <div class="row g-3">
+
+              <div class="col-sm-9">
+                <label for="firstName" class="form-label">Primeiro e ultimo nome</label>
+                <input type="text" class="form-control" formControlName="name" required/>
+                <div class="invalid-feedback">Valid first name is required.</div>
+              </div>
+
+              <div class="col-sm-3">
+                <label for="firstName" class="form-label" style="margin-bottom: 1.2rem;">Tipo de atendimento</label>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-check form-check-inline">
+                          <input [id]="gira.name" [name]="gira.name" type="radio" class="form-check-input" formControlName="typeOfService" value="1" />
+                          <label class="form-check-label" for="{{gira.name}}">Passe</label>
+                        </div>
+    
+                        <div class="form-check form-check-inline">
+                            <input [id]="gira.name" [name]="gira.name" type="radio" class="form-check-input" formControlName="typeOfService" value="2"/>
+                            <label class="form-check-label" for="{{gira.name}}">Consulta</label>
+                        </div>
+                    </div>
+                </div>
+              </div>
+  
+              <div class="col-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" formControlName="email"/>
+                <div class="invalid-feedback">
+                  Please enter a valid email address for shipping updates.
+                </div>
+              </div>
+  
+              <div class="col-6">
+                <label for="zip" class="form-label">Telemovel<span class="text-body-secondary">(Opcional)</span></label>
+                <input type="text" class="form-control" formControlName="phoneNumber"/>
+              </div>
+  
+              <div class="col-12">
+                <label for="address" class="form-label">Vai acompanhado? <span class="text-body-secondary"><a (click)="openAddCompanion()" href="javascript:void(0)">Clique aqui para informar o nome do(s) acompanhante(s)</a></span></label>
+                
+                <table class="table table-hover" *ngIf="companions.length > 0">
+                    <thead>
+                        <tr>
+                          <th scope="col">Nome</th>
+                          <th scope="col">Tipo de atendimento</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let companion of companions">
+                          <th scope="row">{{companion.name}}</th>
+                          <th>{{companion.receiveCleanse == true ? 'Passe' : 'Consulta' }}</th>
+                          <td>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button class="btn btn-outline-danger btn-sm" matTooltip="Excluir acompanhante" (click)="deteleCompanion(companion)"><i class="bi bi-trash3"> </i></button>
+                            </div>
+                        </td>
+                        </tr>
+                      </tbody>
+                  </table>
+
+              </div> 
+  
+              <div class="col-12">
+                <label for="address" class="form-label">Alguma observação adicional?</label>
+                <textarea class="form-control" formControlName="observation" rows="2"></textarea>
+              </div>
+  
+            </div>
+  
+            <br />
+            <br />
+
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" formControlName="consentStoredData"  />
+              <label class="form-check-label" for="same-address">Consentimento para guardar dados. Durante o mês atual.</label>
+            </div>
+  
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" formControlName="consentTermsConditions"  />
+              <label class="form-check-label" for="save-info">Concorda com termos e condições...</label>
+            </div>
+            <br />
+            <br />
+            <button [disabled]="disableSaveButton" class="w-100 btn btn-dark btn-lg" type="submit">
+              <span *ngIf="disableSaveButton" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+              <span *ngIf="!disableSaveButton">Confirmar marcação</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+  
+    <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+      <p class="mb-1">&copy; 2017–2023 Company Name</p>
+      <ul class="list-inline">
+        <li class="list-inline-item"><a href="#">Privacy</a></li>
+        <li class="list-inline-item"><a href="#">Terms</a></li>
+        <li class="list-inline-item"><a href="#">Support</a></li>
+      </ul>
+    </footer>
+  </div>
+
+  <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

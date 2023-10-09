@@ -1,0 +1,33 @@
+<section style="margin-top: 5%;" class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light" style="font-size: 2.5rem;">Próximas Giras</h1>
+         <p class="lead text-body-secondary">A inscrições ficam abertas 7 dias antes da data.</p>
+        <!--<p>
+          <a href="#" class="btn btn-primary my-2">Main call to action</a>
+          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+        </p> -->
+      </div>
+    </div>
+  </section>
+
+<span *ngIf="!completeLoad" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+
+<div *ngIf="completeLoad" class="container marketing">
+
+  <div class="row" style="margin: 1%;">
+    <div class="col-lg-4" *ngFor="let gira of giras.items">
+      <img class="bd-placeholder-img rounded-circle" width="140" height="140" [src]="gira.urlImage == '' ?'https://d3flpus5evl89n.cloudfront.net/5ea9ab64df82fe07900c52df/5f3557c1e9d133046aedbd3b/scaled_768.png' : gira.urlImage" >
+      <h2 class="fw-normal">{{gira.name}}</h2>
+      <p>{{gira.description}}</p>
+      <p>{{gira.startDate | date :'EEEE dd/MM HH:mm'}} - {{gira.endDate | date :'HH:mm'}}</p>
+      <p>
+        <!-- <a class="btn btn-secondary"  href="#">Inscreva-se &raquo;</a> -->
+        <button class="btn btn-secondary" [disabled]="gira.registrationPeriod === false" [routerLink]="['/application', gira.id]">Inscreva-se &raquo;</button>
+      </p>
+    </div>
+  </div>
+
+</div><!-- /.container -->
+
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
