@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GiraService } from '../gira.service';
-import { GiraPagination } from '../models/GiraModel';
+import { Gira, GiraPagination } from '../models/GiraModel';
 import { ToastService } from '../toast.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class ApplicationFormGirasComponent implements OnInit {
     private giraService: GiraService,
     private toastService: ToastService) { }
 
-  giras: GiraPagination = { items: [], total: 0, page:0, size: 0, totalPages: 0 };
+  giras: Gira[] = [];
 
   ngOnInit(): void {
     this.loadOpenGiras();

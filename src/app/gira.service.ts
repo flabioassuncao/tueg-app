@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GiraPagination } from './models/GiraModel';
+import { Gira, GiraPagination } from './models/GiraModel';
 import { ApplicationPagination } from './models/ApplicationModel';
 import { GIRA_API } from './app.api';
 
@@ -14,16 +14,12 @@ export class GiraService {
 
   //===================================================================================
 
-  getOpenGiras() {
-    return this.http.get<GiraPagination>(`${GIRA_API}api/gira`);
-  }
-
   getActivesGiras() {
-    return this.http.get<GiraPagination>(`${GIRA_API}api/gira/active`);
+    return this.http.get<Gira[]>(`${GIRA_API}api/gira/active`);
   }
 
-  getGiraNameById(id: string) {
-    return this.http.get<GiraPagination>(`${GIRA_API}api/gira/name/${id}`);
+  getGiraById(id: string) {
+    return this.http.get<GiraPagination>(`${GIRA_API}api/gira/open/${id}`);
   }
 
   //===================================================================================

@@ -30,6 +30,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
+              "src/tueg.ico",
               "src/assets"
             ],
             "styles": [

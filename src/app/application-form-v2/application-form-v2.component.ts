@@ -17,6 +17,7 @@ export class ApplicationFormV2Component implements OnInit {
   alertMessage = false;
   errors: string[] = [];
 
+  giraId: string = '';
   gira = {name: '', startDate: '', endDate: ''};
 
   companions: { name: string; receiveCleanse: boolean; spiritualConsultation: boolean }[] = [];
@@ -49,11 +50,11 @@ export class ApplicationFormV2Component implements OnInit {
 
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
-    const giraId = routeParams.get('giraId');
+    this.giraId = routeParams.get('giraId')!;
 
-    this.applicationForm.get('giraId')!.setValue(giraId);
+    this.applicationForm.get('giraId')!.setValue(this.giraId);
 
-    this.giraService.getGiraNameById(giraId!).subscribe({
+    this.giraService.getGiraById(this.giraId!).subscribe({
       next: (val: any) => {
         if(val){
           this.gira = val;
@@ -108,8 +109,7 @@ export class ApplicationFormV2Component implements OnInit {
       this.errors.push('Permissão para guardar dados pessoais é necessario.');
     }
 
-    if(this.applicationForm.get('consentTermsConditions')!.value !== true &&
-    this.applicationForm.get('typeOfService')!.value !== '2' ){
+    if(this.applicationForm.get('consentTermsConditions')!.value !== true){
       this.errors.push('Concorde com os termos econdições.');
     }
 
@@ -127,6 +127,7 @@ export class ApplicationFormV2Component implements OnInit {
         next: (val: any) => {
           this.companions = [];
           this.applicationForm.reset();
+          this.applicationForm.get('giraId')!.setValue(this.giraId);
           this.disableSaveButton = false;
           this.toastService.show('Incrição realizado com sucesso. Verifique sua caixa de email.', { classname: 'bg-success text-light', delay: 15000 });
         },
