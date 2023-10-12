@@ -133,8 +133,14 @@ export class ApplicationFormV2Component implements OnInit {
         },
         error: (err: any) => {
           console.error(err);
+
+          if(err.status === 400){
+            this.toastService.show(err.error.errors.Messages[0], { classname: 'bg-danger text-light', delay: 15000 });
+          } else{
+            this.toastService.show('Houve um erro na sua inscrição. Verifique os campos preenchidos.', { classname: 'bg-danger text-light', delay: 15000 });
+          }
+
           this.disableSaveButton = false;
-          this.toastService.show('Houve um erro na sua inscrição. Verifique os campos preenchidos.', { classname: 'bg-danger text-light', delay: 15000 });
         },
       });
     }
