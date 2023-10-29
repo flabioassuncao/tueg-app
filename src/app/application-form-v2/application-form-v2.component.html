@@ -29,25 +29,31 @@
           <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
             <div class="row g-3">
 
-              <div class="col-sm-9">
+              <div class="col-sm-8">
                 <label for="firstName" class="form-label">Primeiro e ultimo nome</label>
                 <input type="text" class="form-control" formControlName="name" required/>
                 <div class="invalid-feedback">Valid first name is required.</div>
               </div>
 
-              <div class="col-sm-3">
+              <div class="col-sm-4">
                 <label for="firstName" class="form-label" style="margin-bottom: 1.2rem;">Tipo de atendimento</label>
                 <div class="row">
                     <div class="col">
-                        <div class="form-check form-check-inline">
-                          <input [id]="gira.name" [name]="gira.name" type="radio" class="form-check-input" formControlName="typeOfService" value="1" />
+
+                        <div *ngIf="gira.acceptCleanse" class="form-check form-check-inline">
+                          <input [id]="gira.name" type="radio" class="form-check-input" formControlName="typeOfService" value="1" />
                           <label class="form-check-label" for="{{gira.name}}">Passe</label>
                         </div>
     
-                        <div class="form-check form-check-inline">
-                            <input [id]="gira.name" [name]="gira.name" type="radio" class="form-check-input" formControlName="typeOfService" value="2"/>
+                        <div *ngIf="gira.acceptConsultation" class="form-check form-check-inline">
+                            <input [id]="gira.name"  type="radio" class="form-check-input" formControlName="typeOfService" value="2"/>
                             <label class="form-check-label" for="{{gira.name}}">Consulta</label>
                         </div>
+
+                        <div *ngIf="gira.acceptWatcher" class="form-check form-check-inline">
+                          <input [id]="gira.name"  type="radio" class="form-check-input" formControlName="typeOfService" value="3"/>
+                          <label class="form-check-label" for="{{gira.name}}">Assistir</label>
+                      </div>
                     </div>
                 </div>
               </div>
@@ -79,7 +85,7 @@
                       <tbody>
                         <tr *ngFor="let companion of companions">
                           <th scope="row">{{companion.name}}</th>
-                          <th>{{companion.receiveCleanse == true ? 'Passe' : 'Consulta' }}</th>
+                          <th>{{companion.receiveCleanse == true ? 'Passe' : companion.spiritualConsultation == true ? 'Consulta' : 'Assistir' }}</th>
                           <td>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button class="btn btn-outline-danger btn-sm" matTooltip="Excluir acompanhante" (click)="deteleCompanion(companion)"><i class="bi bi-trash3"> </i></button>

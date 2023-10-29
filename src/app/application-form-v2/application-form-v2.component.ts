@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { GiraService } from '../gira.service';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { ApplicationFormCompanionComponent } from '../application-form-companion/application-form-companion.component';
 import { ToastService } from '../toast.service';
 
@@ -18,7 +18,7 @@ export class ApplicationFormV2Component implements OnInit {
   errors: string[] = [];
 
   giraId: string = '';
-  gira = {name: '', startDate: '', endDate: ''};
+  gira = {name: '', startDate: '', endDate: '', acceptWatcher: false, acceptConsultation: false, acceptCleanse: false};
 
   companions: { name: string; receiveCleanse: boolean; spiritualConsultation: boolean }[] = [];
 
@@ -34,11 +34,7 @@ export class ApplicationFormV2Component implements OnInit {
 
     consentStoredData: false,
     consentTermsConditions: false,
-    companions: this.formBuilder.array([{
-      name: '',
-      receiveCleanse: false,
-      spiritualConsultation: false
-    }])
+    companions: this.formBuilder.array([]),
   });
 
   constructor(
@@ -68,12 +64,13 @@ export class ApplicationFormV2Component implements OnInit {
 
   openAddCompanion(){
     var dialogRef = this.dialog.open(ApplicationFormCompanionComponent, {
+      data: this.gira,
       width: '50%',
       position: {left:'25%'} });
 
       dialogRef.afterClosed().subscribe({
         next: (val: any) => {
-          if(val.name !== undefined && ( val.receiveCleanse !== false || val.spiritualConsultation !== false)){
+          if(val.name !== undefined &&  val.typeOfService !== ""){
             this.companions.push({ name: val.name, receiveCleanse: val.typeOfService == 1 ? true : false, spiritualConsultation: val.typeOfService == 2 ? true : false});
           }
         },
@@ -83,13 +80,27 @@ export class ApplicationFormV2Component implements OnInit {
       });
   }
 
+  addCompanion(companion?: any): void {
+    const companionGroup = this.formBuilder.group({
+      name: '',
+      receiveCleanse: false,
+      spiritualConsultation: false,
+    });
+
+    if (companion) {
+      companionGroup.setValue(companion);
+    }
+
+    (this.applicationForm.get('companions') as FormArray).push(companionGroup);
+  }
+
   onSubmit(): void {
     this.alertMessage = false
     this.errors = [];
     this.disableSaveButton = true;
 
     if(this.companions.length > 0){
-      this.applicationForm.get('companions')!.setValue(this.companions);
+      this.companions.forEach((companion) => this.addCompanion(companion));
     }
 
     if(this.applicationForm.get('name')!.value == ''){
@@ -101,7 +112,8 @@ export class ApplicationFormV2Component implements OnInit {
     }
 
     if(this.applicationForm.get('typeOfService')!.value !== '1' &&
-    this.applicationForm.get('typeOfService')!.value !== '2' ){
+    this.applicationForm.get('typeOfService')!.value !== '2' &&
+    this.applicationForm.get('typeOfService')!.value !== '3' ){
       this.errors.push('Informe o Tipo de Atendimento.');
     }
 
@@ -119,8 +131,15 @@ export class ApplicationFormV2Component implements OnInit {
     } else {
       if(this.applicationForm.get('typeOfService')!.value == '1'){
         this.applicationForm.get('receiveCleanse')!.setValue(true);
-      } else {
+        this.applicationForm.get('spiritualConsultation')!.setValue(false);
+      } 
+      if(this.applicationForm.get('typeOfService')!.value == '2'){
         this.applicationForm.get('spiritualConsultation')!.setValue(true);
+        this.applicationForm.get('receiveCleanse')!.setValue(false);
+      }
+      if(this.applicationForm.get('typeOfService')!.value == '3'){
+        this.applicationForm.get('receiveCleanse')!.setValue(false);
+        this.applicationForm.get('spiritualConsultation')!.setValue(false);
       }
   
       this.giraService.createApplicationV2(this.applicationForm.value).subscribe({
@@ -139,7 +158,7 @@ export class ApplicationFormV2Component implements OnInit {
           } else{
             this.toastService.show('Houve um erro na sua inscrição. Verifique os campos preenchidos.', { classname: 'bg-danger text-light', delay: 15000 });
           }
-
+          
           this.disableSaveButton = false;
         },
       });

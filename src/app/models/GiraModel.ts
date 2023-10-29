@@ -9,6 +9,10 @@ export interface Gira
     acceptRegistration: boolean;
     registrationPeriod: boolean;
 
+    acceptWatcher: boolean;
+    acceptConsultation: boolean;
+    acceptCleanse: boolean;
+
     approvedForReceiveCleanse: number;
     approvedForSpiritualConsultation: number;  
 }
