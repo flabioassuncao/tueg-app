@@ -15,6 +15,11 @@
 
 <div *ngIf="completeLoad" class="container marketing">
 
+  <div *ngIf="giras.length == 0" class="alert alert-warning text-center" role="alert">
+    <h4 class="alert-heading">Ainda não há Giras cadastras para datas futuras ):</h4>
+    <p class="mb-0">Não se preocupre, logo logo teremos nosso calendario disponível. </p>
+  </div>
+
   <div class="row" style="margin: 1%;">
     <div class="col-lg-4" *ngFor="let gira of giras">
       <img class="bd-placeholder-img rounded-circle" width="140" height="140" [src]="gira.urlImage == '' ?'https://d3flpus5evl89n.cloudfront.net/5ea9ab64df82fe07900c52df/5f3557c1e9d133046aedbd3b/scaled_768.png' : gira.urlImage" >
