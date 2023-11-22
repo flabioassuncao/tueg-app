@@ -23,6 +23,7 @@ import { ApplicationFormGirasComponent } from './application-form-giras/applicat
 import { ApplicationFormV2Component } from './application-form-v2/application-form-v2.component';
 import { ApplicationFormCompanionComponent } from './application-form-companion/application-form-companion.component';
 import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -53,7 +54,7 @@ import { ToastsContainerComponent } from './toasts-container/toasts-container.co
     NgbTooltipModule,
     ToastsContainerComponent
   ],
-  providers: [provideNgxMask()],
+  providers: [provideNgxMask(), DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
