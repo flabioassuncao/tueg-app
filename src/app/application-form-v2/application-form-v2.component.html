@@ -108,13 +108,16 @@
             <br />
 
             <div class="form-check">
-              <input type="checkbox" class="form-check-input" formControlName="consentStoredData"  />
-              <label class="form-check-label" for="same-address">Consentimento para guardar dados. Durante o mês atual.</label>
+              <input type="checkbox" class="form-check-input" formControlName="consentTermsOfUseTermsOfServicePrivacyPolicy"  />
+              <label class="form-check-label" for="same-address">Eu concordo com a 
+                <a [routerLink]="['/privacy-policy']">Política de Privacidade</a>, os 
+                <a [routerLink]="['/terms-use']"> Termos de Uso</a> e os 
+                <a [routerLink]="['/terms-service']">Termos de Serviço</a></label>
             </div>
   
             <div class="form-check">
-              <input type="checkbox" class="form-check-input" formControlName="consentTermsConditions"  />
-              <label class="form-check-label" for="save-info">Concorda com termos e condições...</label>
+              <input type="checkbox" class="form-check-input" formControlName="consentReceiveNews"  />
+              <label class="form-check-label" for="save-info">Concordo em receber notificações com novidades através dos contatos fornecidos.</label>
             </div>
             <br />
             <br />
@@ -130,9 +133,9 @@
     <footer class="my-5 pt-5 text-body-secondary text-center text-small">
       <p class="mb-1">&copy; 2017–2023 TUEG - Templo de Umbanda Estrela Guia</p>
       <ul class="list-inline">
-        <li class="list-inline-item"><a href="#">Privacidade</a></li>
-        <li class="list-inline-item"><a href="#">Termos</a></li>
-        <li class="list-inline-item"><a href="#">Suporte</a></li>
+        <li class="list-inline-item"><a [routerLink]="['/privacy-policy']">Privacidade</a></li>
+        <li class="list-inline-item"><a [routerLink]="['/terms-use']">Termos</a></li>
+        <li class="list-inline-item"><a href="https://www.tueg.org/contactos">Suporte</a></li>
       </ul>
     </footer>
   </div>

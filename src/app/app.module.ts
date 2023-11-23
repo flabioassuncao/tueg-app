@@ -24,6 +24,9 @@ import { ApplicationFormV2Component } from './application-form-v2/application-fo
 import { ApplicationFormCompanionComponent } from './application-form-companion/application-form-companion.component';
 import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
 import { DatePipe } from '@angular/common';
+import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
+import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 
 @NgModule({
@@ -32,7 +35,10 @@ import { DatePipe } from '@angular/common';
     TopBarComponent,
     ApplicationFormGirasComponent,
     ApplicationFormV2Component,
-    ApplicationFormCompanionComponent
+    ApplicationFormCompanionComponent,
+    TermsOfServiceComponent,
+    TermsOfUseComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +47,9 @@ import { DatePipe } from '@angular/common';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: ApplicationFormGirasComponent },
+      { path: 'terms-service', component: TermsOfServiceComponent },
+      { path: 'terms-use', component: TermsOfUseComponent },
+      { path: 'privacy-policy', component: PrivacyPolicyComponent },
       { path: 'application/:giraId', component: ApplicationFormV2Component }
     ]),
     NgxMaskDirective, NgxMaskPipe,

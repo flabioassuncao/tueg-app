@@ -32,8 +32,9 @@ export class ApplicationFormV2Component implements OnInit {
     receiveCleanse: false,
     spiritualConsultation: false,
 
-    consentStoredData: false,
-    consentTermsConditions: false,
+    consentReceiveNews: false,
+    consentTermsOfUseTermsOfServicePrivacyPolicy: false,
+    
     companions: this.formBuilder.array([]),
   });
 
@@ -99,10 +100,6 @@ export class ApplicationFormV2Component implements OnInit {
     this.errors = [];
     this.disableSaveButton = true;
 
-    if(this.companions.length > 0){
-      this.companions.forEach((companion) => this.addCompanion(companion));
-    }
-
     if(this.applicationForm.get('name')!.value == ''){
       this.errors.push('Informe o seu nome.');
     }
@@ -117,18 +114,25 @@ export class ApplicationFormV2Component implements OnInit {
       this.errors.push('Informe o Tipo de Atendimento.');
     }
 
-    if(this.applicationForm.get('consentStoredData')!.value !== true){
-      this.errors.push('Permissão para guardar dados pessoais é necessario.');
+    if(this.applicationForm.get('consentTermsOfUseTermsOfServicePrivacyPolicy')!.value !== true){
+      this.errors.push('Você precisa concordar com a Política de Privacidade, os Termos de Uso e os Termos de Serviço.');
     }
 
-    if(this.applicationForm.get('consentTermsConditions')!.value !== true){
-      this.errors.push('Concorde com os termos econdições.');
+    if(this.applicationForm.get('consentReceiveNews')!.value !== true){
+      this.applicationForm.get('consentReceiveNews')!.setValue(false);
     }
 
-    if(this.errors.length > 0){
+    if(this.errors.length > 0) {
       this.alertMessage = true;
       this.disableSaveButton = false;
-    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } 
+    else {
+
+      if(this.companions.length > 0){
+        this.companions.forEach((companion) => this.addCompanion(companion));
+      }
+
       if(this.applicationForm.get('typeOfService')!.value == '1'){
         this.applicationForm.get('receiveCleanse')!.setValue(true);
         this.applicationForm.get('spiritualConsultation')!.setValue(false);
@@ -141,10 +145,12 @@ export class ApplicationFormV2Component implements OnInit {
         this.applicationForm.get('receiveCleanse')!.setValue(false);
         this.applicationForm.get('spiritualConsultation')!.setValue(false);
       }
-  
+
       this.giraService.createApplicationV2(this.applicationForm.value).subscribe({
         next: (val: any) => {
           this.companions = [];
+          const companionsArray = this.applicationForm.get('companions') as FormArray;
+          companionsArray.clear();
           this.applicationForm.reset();
           this.applicationForm.get('giraId')!.setValue(this.giraId);
           this.disableSaveButton = false;

@@ -4,8 +4,10 @@ export interface Application {
     phoneNumber: string;
     email: string;
     observation: string;
-    consentStoredData: boolean;
-    consentTermsConditions: boolean;
+
+    consentReceiveNews: boolean;
+    consentTermsOfUseTermsOfServicePrivacyPolicy: boolean;
+
     companions: string;
     giraForm: GiraForm[];
 
