@@ -28,7 +28,7 @@
       <p>{{ translateDayName(gira.startDate)}} {{gira.startDate | date :'dd/MM HH:mm'}} - {{gira.endDate | date :'HH:mm'}}</p>
       <p>
         <!-- <a class="btn btn-secondary"  href="#">Inscreva-se &raquo;</a> -->
-        <button *ngIf="gira.registrationPeriod" class="btn btn-secondary" [routerLink]="['/application', gira.id]">Inscreva-se &raquo;</button>
+        <button *ngIf="gira.registrationPeriod && (gira.acceptCleanse === true || gira.acceptConsultation === true || gira.acceptWatcher === true)" class="btn btn-secondary" [routerLink]="['/application', gira.id]">Inscreva-se &raquo;</button>
       </p>
     </div>
   </div>
