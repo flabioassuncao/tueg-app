@@ -12,7 +12,7 @@ import { ToastService } from '../toast.service';
 export class ConfirmPresenceComponent implements OnInit {
 
   disableCancelButton = false;
-  giraAvailable: boolean = true;
+  giraAvailable: boolean = false;
   application: Application | undefined;
   applicationId: string = '';
 
@@ -30,8 +30,8 @@ export class ConfirmPresenceComponent implements OnInit {
       next: (val: any) => {
         if(val){
           this.application = val;
-          if(new Date() > new Date(val.gira.startDate)){
-            this.giraAvailable = false;
+          if(new Date() < new Date(val.gira.startDate)){
+            this.giraAvailable = true;
           }
         }
       },

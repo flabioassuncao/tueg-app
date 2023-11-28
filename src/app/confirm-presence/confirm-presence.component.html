@@ -1,12 +1,21 @@
 <section style="margin-top: 5%;" class="py-5 text-center container">
 
     <div *ngIf="!giraAvailable" class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light" style="font-size: 2rem;">Inscrição para gira do dia {{application?.gira?.startDate | date :'dd/MM HH:mm'}}</h1>
+        
+        <div *ngIf="application !== undefined" class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light" style="font-size: 2rem;">Inscrição para gira do dia {{application!.gira!.startDate | date :'dd/MM HH:mm'}}</h1>
             <p class="lead text-body-secondary">
-                Olá <b>{{application?.name}}</b>! Nenhuma ação é necessária para essa inscrição.</p>
+                Olá <b>{{application!.name}}</b>! Nenhuma ação é necessária para essa inscrição.</p>
             <p>
         </div>
+
+        <div *ngIf="application === undefined" class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light" style="font-size: 2rem;">Olá</h1>
+            <p class="lead text-body-secondary">
+                Não há ações disponíveis nessa página.</p>
+            <p>
+        </div>
+
     </div>
 
     <div *ngIf="giraAvailable" class="row py-lg-5">
