@@ -27,6 +27,7 @@ import { DatePipe } from '@angular/common';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { ConfirmPresenceComponent } from './confirm-presence/confirm-presence.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     ApplicationFormCompanionComponent,
     TermsOfServiceComponent,
     TermsOfUseComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    ConfirmPresenceComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
       { path: 'terms-service', component: TermsOfServiceComponent },
       { path: 'terms-use', component: TermsOfUseComponent },
       { path: 'privacy-policy', component: PrivacyPolicyComponent },
+      { path: 'confirm-presence/:applicationId', component: ConfirmPresenceComponent },
       { path: 'application/:giraId', component: ApplicationFormV2Component }
     ]),
     NgxMaskDirective, NgxMaskPipe,

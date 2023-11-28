@@ -154,7 +154,7 @@ export class ApplicationFormV2Component implements OnInit {
           this.applicationForm.reset();
           this.applicationForm.get('giraId')!.setValue(this.giraId);
           this.disableSaveButton = false;
-          this.toastService.show('Incrição realizado com sucesso. Verifique sua caixa de email.', { classname: 'bg-success text-light', delay: 15000 });
+          this.toastService.show('Inscrição realizado com sucesso. Verifique sua caixa de email.', { classname: 'bg-success text-light', delay: 15000 });
         },
         error: (err: any) => {
           console.error(err);
@@ -164,7 +164,9 @@ export class ApplicationFormV2Component implements OnInit {
           } else{
             this.toastService.show('Houve um erro na sua inscrição. Verifique os campos preenchidos.', { classname: 'bg-danger text-light', delay: 15000 });
           }
-          
+
+          const companionsArray = this.applicationForm.get('companions') as FormArray;
+          companionsArray.clear();
           this.disableSaveButton = false;
         },
       });

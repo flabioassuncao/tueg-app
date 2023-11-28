@@ -1,0 +1,59 @@
+<section style="margin-top: 5%;" class="py-5 text-center container">
+
+    <div *ngIf="!giraAvailable" class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light" style="font-size: 2rem;">Inscrição para gira do dia {{application?.gira?.startDate | date :'dd/MM HH:mm'}}</h1>
+            <p class="lead text-body-secondary">
+                Olá <b>{{application?.name}}</b>! Nenhuma ação é necessária para essa inscrição.</p>
+            <p>
+        </div>
+    </div>
+
+    <div *ngIf="giraAvailable" class="row py-lg-5">
+
+        <div *ngIf="application?.approved === null" class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light" style="font-size: 2rem;">Inscrição para gira do dia {{application?.gira?.startDate | date :'dd/MM HH:mm'}}</h1>
+            <p class="lead text-body-secondary">
+                Olá <b>{{application?.name}}</b>! A sua inscrição para {{application?.gira?.name}} ainda está pendente de aprovação.</p>
+            <p>
+            <p class="text-body-secondary">
+                <span class="text-body-secondary">Você pode cancelar sua incrição a qualquer momento clicando no botão abaixo.</span>
+            </p>
+            <p>
+                <button (click)="cancelApplication(application!.id)" [disabled]="disableCancelButton" class="btn btn-danger my-2">
+                    <span *ngIf="disableCancelButton" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                    <span *ngIf="!disableCancelButton">Cancelar inscrição</span>
+                </button>
+            </p>
+        </div>
+
+        <div *ngIf="application?.approved === true" class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light" style="font-size: 2rem;">Inscrição para gira do dia {{application?.gira?.startDate | date :'dd/MM HH:mm'}}</h1>
+            <p class="lead text-body-secondary">
+                Olá <b>{{application?.name}}</b>! A sua inscrição para {{application?.gira?.name}} está <b>Aprovada</b>.
+            </p>
+            <p>
+            <p class="lead text-body-secondary">
+                Sua presença está confirmada para: <b>{{ application?.receiveCleanse === true ? 'Passe' : (application?.spiritualConsultation === true ? 'Consulta' : 'Assistir') }}</b>. 
+                Caso não tenha interesse em comparacer, você pode cancelar sua inscrição clicando no botão abaixo
+            </p>
+            <p>
+                <button (click)="cancelApplication(application!.id)" [disabled]="disableCancelButton" class="btn btn-danger my-2">
+                    <span *ngIf="disableCancelButton" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                    <span *ngIf="!disableCancelButton">Cancelar inscrição</span>
+                </button>
+            </p>
+        </div>
+
+        <div *ngIf="application?.approved === false" class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light" style="font-size: 2rem;">Inscrição para gira do dia {{application?.gira?.startDate | date :'dd/MM HH:mm'}}</h1>
+            <p class="lead text-body-secondary">
+                Olá <b>{{application?.name}}</b>! Pedimos desculpas, mas a sua inscrição para {{application?.gira?.name}} <b>não foi provada</b> devido a lotação maxima do espaço.</p>
+            <p>
+            <p>
+            </p>
+        </div>
+    </div>
+  </section>
+  
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

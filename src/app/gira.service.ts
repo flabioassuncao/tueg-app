@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Gira, GiraPagination } from './models/GiraModel';
-import { ApplicationPagination } from './models/ApplicationModel';
+import { Application, ApplicationPagination } from './models/ApplicationModel';
 import { GIRA_API } from './app.api';
 
 @Injectable({
@@ -24,6 +24,10 @@ export class GiraService {
 
   //===================================================================================
 
+  getApplicationById(applicationId: string) {
+    return this.http.get<Application>(`${GIRA_API}api/application-form/application/${applicationId}`);
+  }
+
   createApplication(body: any) {
     return this.http.post<any>(`${GIRA_API}api/application-form`, body);
   }
@@ -38,5 +42,9 @@ export class GiraService {
         filter: filter
       }
     });
+  }
+  
+  cancelApplication(applicationId: string) {
+    return this.http.post<any>(`${GIRA_API}api/application-form/cancel/${applicationId}`, null);
   }
 }

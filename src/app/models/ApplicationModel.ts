@@ -4,13 +4,11 @@ export interface Application {
     phoneNumber: string;
     email: string;
     observation: string;
-
-    consentReceiveNews: boolean;
-    consentTermsOfUseTermsOfServicePrivacyPolicy: boolean;
-
+    ConsentReceiveNews: boolean;
+    ConsentTermsOfUseTermsOfServicePrivacyPolicy: boolean;
     companions: string;
     giraForm: GiraForm[];
-
+    gira: GiraOpen;
     inscriptionAt: Date;
     receiveCleanse: boolean;
     spiritualConsultation: boolean;
@@ -38,4 +36,13 @@ export interface Application {
     page: number,
     size: number,
     totalPages: number
+}
+
+export interface GiraOpen {
+  name: string, 
+  startDate: string, 
+  endDate: string, 
+  acceptWatcher: boolean, 
+  acceptConsultation: boolean, 
+  acceptCleanse: boolean
 }
