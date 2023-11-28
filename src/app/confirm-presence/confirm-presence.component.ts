@@ -30,7 +30,7 @@ export class ConfirmPresenceComponent implements OnInit {
       next: (val: any) => {
         if(val){
           this.application = val;
-          if(new Date() > new Date(val.startDate)){
+          if(new Date() > new Date(val.gira.startDate)){
             this.giraAvailable = false;
           }
         }
