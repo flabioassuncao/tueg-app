@@ -44,7 +44,7 @@
             <p>
             <p class="lead text-body-secondary">
                 Sua presença está confirmada para: <b>{{ application?.receiveCleanse === true ? 'Passe' : (application?.spiritualConsultation === true ? 'Consulta' : 'Assistir') }}</b>. 
-                Caso não tenha interesse em comparacer, você pode cancelar sua inscrição clicando no botão abaixo
+                Caso não tenha interesse em comparecer, pode cancelar sua inscrição clicando no botão abaixo
             </p>
             <p>
                 <button (click)="cancelApplication(application!.id)" [disabled]="disableCancelButton" class="btn btn-danger my-2">
