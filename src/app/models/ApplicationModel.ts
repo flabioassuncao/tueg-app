@@ -14,6 +14,7 @@ export interface Application {
     spiritualConsultation: boolean;
     approvedAt?: Date;
     approved?: boolean;
+    cancelledByUser?: boolean;
     numberOfCompanions: number;
     listCompanions: ApplicationForm[]
   }

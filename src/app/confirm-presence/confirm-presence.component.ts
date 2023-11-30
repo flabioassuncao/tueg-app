@@ -26,6 +26,29 @@ export class ConfirmPresenceComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     this.applicationId = routeParams.get('applicationId')!;
 
+    this.getApplication();
+  }
+
+  cancelApplication(applicationId: string){
+    this.disableCancelButton = true;
+
+    this.giraService.cancelApplication(applicationId).subscribe({
+      next: (val: any) => {
+        this.toastService.show('Pedido de cancelamento realizado com sucesso. Verifique sua caixa de email.', { classname: 'bg-success text-light', delay: 10000 });
+        this.disableCancelButton = false;
+
+        this.application!.cancelledByUser = true;
+        this.application!.approved = false;
+      },
+      error: (err: any) => {
+        console.error(err);
+        this.disableCancelButton = false;
+        this.toastService.show('Houve um erro ao cancelar sua inscrição. Tente novamente mais tarde.', { classname: 'bg-danger text-light', delay: 15000 });
+      },
+    });
+  }
+
+  getApplication(){
     this.giraService.getApplicationById(this.applicationId!).subscribe({
       next: (val: any) => {
         if(val){
@@ -37,22 +60,6 @@ export class ConfirmPresenceComponent implements OnInit {
       },
       error: (err: any) => {
         console.error(err);
-      },
-    });
-  }
-
-  cancelApplication(applicationId: string){
-    this.disableCancelButton = true;
-
-    this.giraService.cancelApplication(applicationId).subscribe({
-      next: (val: any) => {
-        this.disableCancelButton = false;
-        this.toastService.show('Pedido de cancelamento realizado com sucesso. Verifique sua caixa de email.', { classname: 'bg-success text-light', delay: 10000 });
-      },
-      error: (err: any) => {
-        console.error(err);
-        this.disableCancelButton = false;
-        this.toastService.show('Houve um erro ao cancelar sua inscrição. Tente novamente mais tarde.', { classname: 'bg-danger text-light', delay: 15000 });
       },
     });
   }
