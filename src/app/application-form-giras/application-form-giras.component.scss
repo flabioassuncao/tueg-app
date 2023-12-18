@@ -4,6 +4,7 @@
 /* Padding below the footer and lighter body text */
 
 body {
+    font-family: Barlow, "Helvetica Neue", sans-serif;
     padding-top: 3rem;
     padding-bottom: 3rem;
     color: rgb(var(--bs-tertiary-color-rgb));
@@ -161,4 +162,17 @@ body {
     display: block !important;
   }
   
+    /* Titles 
+  -------------------------------------------------- */
 
+  .custom-title {
+    font-family: Hind;
+    font-weight: 700 !important;
+  }
+
+  /* texts
+  -------------------------------------------------- */
+  .custom-text {
+    font-family: Barlow;
+    font-weight: 400;
+  }

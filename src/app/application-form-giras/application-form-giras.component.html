@@ -1,38 +1,59 @@
 <section style="margin-top: 5%; padding-bottom: 1rem; padding-top: 4rem;" class="text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light" style="font-size: 2.5rem;">Próximas Giras</h1>
-         <p class="lead text-body-secondary">Salvo alguma exceção, as inscrições abrem no início de cada semana e ficam disponíveis até às 22h00 da sexta-feira anterior à Gira.</p>
+        <h1 class="fw-light custom-title" style="font-size: 2.5rem;">Próximas Giras</h1>
+         <p class="lead text-body-secondary custom-text">Salvo alguma exceção, as inscrições abrem no início de cada semana e ficam disponíveis até às 22h00 da sexta-feira anterior à Gira.</p>
         <!--<p>
           <a href="#" class="btn btn-primary my-2">Main call to action</a>
           <a href="#" class="btn btn-secondary my-2">Secondary action</a>
         </p> -->
       </div>
     </div>
-  </section>
+</section>
 
 <span *ngIf="!completeLoad" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
 
 <div *ngIf="completeLoad" class="container marketing">
 
   <div *ngIf="giras.length == 0" class="alert alert-warning text-center" role="alert">
-    <h4 class="alert-heading">Ainda não há Giras cadastradas para datas futuras ):</h4>
-    <p class="mb-0">Não se preocupe, logo logo teremos nosso calendario disponível. </p>
+    <h4 class="alert-heading custom-text">Ainda não há Giras cadastradas para datas futuras ):</h4>
+    <p class="mb-0 custom-text">Não se preocupe, logo logo teremos nosso calendario disponível. </p>
   </div>
 
   <div class="row" style="margin: 1%;">
-    <div class="col-lg-4" *ngFor="let gira of giras">
-      <img class="bd-placeholder-img rounded-circle" width="140" height="140" [src]="gira.urlImage == '' ?'https://d3flpus5evl89n.cloudfront.net/5ea9ab64df82fe07900c52df/5f3557c1e9d133046aedbd3b/scaled_768.png' : gira.urlImage" >
-      <h2 class="fw-normal">{{gira.name}}</h2>
-      <p>{{gira.description}}</p>
-      <p>{{ translateDayName(gira.startDate)}} {{gira.startDate | date :'dd/MM HH:mm'}} - {{gira.endDate | date :'HH:mm'}}</p>
-      <p>
+    <div class="col-lg-4" *ngFor="let gira of giras"> <!-- style="position: relative; overflow: hidden;" -->
+
+      <!-- <div style="position: absolute; top: -3%; left: 12%; width: 73%; height: 111%; /*! z-index: -1; */ background: url('https://www.benditas.art.br/cursos/wp-content/uploads/2021/04/faixa_encerrada.png') center center / cover no-repeat;/*! opacity: 1.1 !important; */transform: rotate(-12deg);"></div> -->
+      <!-- <div class="bd-placeholder-img" style="position: absolute; top: 22%; left: 5%; width: 88%; height: 60%; /*! z-index: -1; */ background: url('https://6ciclo.files.wordpress.com/2016/05/gepied.gif') center center / cover no-repeat;/*! opacity: 1.1 !important; */transform: rotate(-11deg);background-size: contain;"></div> -->
+
+      <img class="bd-placeholder-img rounded-circle" width="140" height="140" [src]="gira.urlImage == '' ? 'https://d3flpus5evl89n.cloudfront.net/5ea9ab64df82fe07900c52df/5f3557c1e9d133046aedbd3b/scaled_768.png' : gira.urlImage" >
+      <h2 class="fw-normal custom-title" style="margin-bottom: 0px;margin-top: 10px;">{{gira.name}}</h2>
+      <p class="custom-text">{{gira.description}}</p>
+      <p class="custom-text">{{ translateDayName(gira.startDate)}} {{gira.startDate | date :'dd/MM'}}</p>
+      <p class="custom-text">{{gira.startDate | date :'HH:mm'}} - {{gira.endDate | date :'HH:mm'}}</p>
+      <p *ngIf="gira.closedEvent == false">
         <!-- <a class="btn btn-secondary"  href="#">Inscreva-se &raquo;</a> -->
-        <button *ngIf="gira.registrationPeriod && (gira.acceptCleanse === true || gira.acceptConsultation === true || gira.acceptWatcher === true)" class="btn btn-secondary" [routerLink]="['/application', gira.id]">Inscreva-se &raquo;</button>
+        <button *ngIf="gira.registrationsClosed == false && gira.registrationPeriod && (gira.acceptCleanse === true || gira.acceptConsultation === true || gira.acceptWatcher === true)" class="btn btn-secondary custom-text" [routerLink]="['/application', gira.id]">Inscreva-se &raquo;</button>
       </p>
+      <div *ngIf="gira.registrationsClosed && gira.closedEvent == false" class="alert alert-warning text-center" role="alert">
+        <p class="mb-0 custom-text">Inscrições encerradas </p>
+      </div>
+
+      <div *ngIf="gira.closedEvent == true" class="alert alert-warning text-center" role="alert">
+        <p class="mb-0 custom-text">Evento fechado</p>
+      </div>
     </div>
   </div>
 
 </div><!-- /.container -->
+
+<footer class="my-5 pt-5 text-body-secondary text-center text-small">
+  <p class="mb-1 custom-text">&copy; 2019–{{getCurrentYear()}} TUEG - Templo de Umbanda Estrela Guia</p>
+  <ul class="list-inline custom-text">
+    <li class="list-inline-item"><a [routerLink]="['/privacy-policy']">Privacidade</a></li>
+    <li class="list-inline-item"><a [routerLink]="['/terms-use']">Termos</a></li>
+    <li class="list-inline-item"><a href="https://www.tueg.org/contactos">Suporte</a></li>
+  </ul>
+</footer>
 
 <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

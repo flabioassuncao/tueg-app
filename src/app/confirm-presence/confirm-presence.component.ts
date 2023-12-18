@@ -60,6 +60,7 @@ export class ConfirmPresenceComponent implements OnInit {
       },
       error: (err: any) => {
         console.error(err);
+        this.toastService.show(err.error.errors.Messages[0], { classname: 'bg-danger text-light', delay: 10000 });
       },
     });
   }

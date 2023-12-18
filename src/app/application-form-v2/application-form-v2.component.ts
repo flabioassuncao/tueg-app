@@ -5,6 +5,7 @@ import { GiraService } from '../gira.service';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { ApplicationFormCompanionComponent } from '../application-form-companion/application-form-companion.component';
 import { ToastService } from '../toast.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-application-form-v2',
@@ -43,6 +44,7 @@ export class ApplicationFormV2Component implements OnInit {
     private route: ActivatedRoute, 
     private giraService: GiraService,
     private formBuilder: FormBuilder,
+    private datePipe: DatePipe,
     private toastService: ToastService) { }
 
   ngOnInit(): void {
@@ -59,6 +61,7 @@ export class ApplicationFormV2Component implements OnInit {
       },
       error: (err: any) => {
         console.error(err);
+        this.toastService.show(err.error.errors.Messages[0], { classname: 'bg-danger text-light', delay: 10000 });
       },
     });
   }
@@ -159,9 +162,9 @@ export class ApplicationFormV2Component implements OnInit {
         error: (err: any) => {
           console.error(err);
 
-          if(err.status === 400){
+          if(err.status === 400 || err.status === 500){
             this.toastService.show(err.error.errors.Messages[0], { classname: 'bg-danger text-light', delay: 15000 });
-          } else{
+          } else {
             this.toastService.show('Houve um erro na sua inscrição. Verifique os campos preenchidos.', { classname: 'bg-danger text-light', delay: 15000 });
           }
 
@@ -179,6 +182,10 @@ export class ApplicationFormV2Component implements OnInit {
     if (index !== -1) {
       this.companions.splice(index, 1);
     }
+  }
+
+  getCurrentYear() {
+    return this.datePipe.transform(new Date(), 'yyyy');
   }
 
 }

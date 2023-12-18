@@ -60,4 +60,8 @@ export class ApplicationFormGirasComponent implements OnInit {
         return ''; // Handle any unexpected cases
     }
   }
+
+  getCurrentYear() {
+    return this.datePipe.transform(new Date(), 'yyyy');
+  }
 }

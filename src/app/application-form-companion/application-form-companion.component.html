@@ -2,42 +2,42 @@
     <div class="row g-8">
         <div class="col-md-12">
             <br />
-            <h2 class="mb-4">Adicionar acompanhante</h2>
+            <h2 class="mb-4 custom-title">Adicionar acompanhante</h2>
             <form [formGroup]="companionForm" (ngSubmit)="onSubmit()">
                 <div class="row g-4">
                     
-                    <div class="col-sm-6">
-                        <label for="firstName" class="form-label">Nome e sobrenome</label>
+                    <div class="col-sm-6" style="margin-top: 6px;">
+                        <label for="firstName" class="form-label custom-text">Primeiro e último nome</label>
                         <input type="text" class="form-control" formControlName="name" required/>
                     </div>
                     
-                    <div class="col-sm-6">
-                        <label for="firstName" class="form-label" style="margin-bottom: 1.2rem;">Tipo de atendimento</label>
+                    <div class="col-sm-6" style="margin-top: 13px;">
+                        <label for="firstName" class="form-label custom-text" style="margin-bottom: 1.2rem;">Tipo de atendimento</label>
                         <div class="row">
                             <div class="col">
-                                <!-- <div *ngIf="data.acceptCleanse" class="form-check form-check-inline">
+                                <!-- <div *ngIf="data.acceptCleanse" class="form-check form-check-inline custom-text">
                                   <input type="radio" class="form-check-input" formControlName="typeOfService" value="1" />
                                   <label class="form-check-label">Passe</label>
                                 </div>
             
-                                <div *ngIf="data.acceptConsultation" class="form-check form-check-inline">
+                                <div *ngIf="data.acceptConsultation" class="form-check form-check-inline custom-text">
                                     <input  type="radio" class="form-check-input" formControlName="typeOfService" value="2"/>
                                     <label class="form-check-label">Consulta</label>
                                 </div> -->
 
-                                <div *ngIf="data.acceptWatcher" class="form-check form-check-inline">
+                                <div *ngIf="data.acceptWatcher" class="form-check form-check-inline custom-text">
                                     <input  type="radio" class="form-check-input" formControlName="typeOfService" value="3"/>
                                     <label class="form-check-label">Assistir</label>
                                 </div>
                             </div>
                         </div>
                       </div>
-                      <br />
-                      <br />
-                      <div class="col-sm-6 justify-content-md-end"></div>
-                      <div class="col-sm-6 justify-content-md-end">
-                        <button mat-dialog-close style="margin-right: 10%;" class="btn btn-outline-danger btn-sm">Cancelar</button>
-                        <button class="btn btn-outline-dark btn-sm" type="submit">Adicionar</button>
+
+                      <div class="col-sm-6">
+                      </div>
+                      <div class="col-sm-6" style="text-align: end;">
+                        <button mat-dialog-close style="margin-right: 10%;" class="btn btn-outline-danger btn-sm custom-text">Cancelar</button>
+                        <button class="btn btn-outline-dark btn-sm custom-text" type="submit">Adicionar</button>
                       </div>
                   </div>
                  

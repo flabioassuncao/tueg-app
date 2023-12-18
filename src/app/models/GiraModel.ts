@@ -6,8 +6,9 @@ export interface Gira
     name: string;
     description: string;
     urlImage: string;
-    acceptRegistration: boolean;
+    closedEvent: boolean;
     registrationPeriod: boolean;
+    registrationsClosed: boolean;
 
     acceptWatcher: boolean;
     acceptConsultation: boolean;

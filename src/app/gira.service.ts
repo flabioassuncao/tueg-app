@@ -35,14 +35,6 @@ export class GiraService {
   createApplicationV2(body: any) {
     return this.http.post<any>(`${GIRA_API}api/v2/application-form`, body);
   }
-
-  getApplicationsByGiraId(giraId: string, filter: string) {
-    return this.http.get<ApplicationPagination>(`${GIRA_API}api/application-form/${giraId}`, {
-      params: {
-        filter: filter
-      }
-    });
-  }
   
   cancelApplication(applicationId: string) {
     return this.http.post<any>(`${GIRA_API}api/application-form/cancel/${applicationId}`, null);
