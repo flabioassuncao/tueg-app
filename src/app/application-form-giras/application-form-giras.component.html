@@ -30,11 +30,13 @@
       <img class="bd-placeholder-img rounded-circle" width="140" height="140" [src]="gira.urlImage == '' ? 'https://d3flpus5evl89n.cloudfront.net/5ea9ab64df82fe07900c52df/5f3557c1e9d133046aedbd3b/scaled_768.png' : gira.urlImage" >
       <h2 class="fw-normal custom-title" style="margin-bottom: 0px;margin-top: 10px;">{{gira.name}}</h2>
       <p class="custom-text">{{gira.description}}</p>
-      <p class="custom-text">{{ translateDayName(gira.startDate)}} {{gira.startDate | date :'dd/MM'}}</p>
+      <p class="custom-text" style="margin-top: -2%;margin-bottom: 0%;">{{ translateDayName(gira.startDate)}} {{gira.startDate | date :'dd/MM'}}</p>
       <p class="custom-text">{{gira.startDate | date :'HH:mm'}} - {{gira.endDate | date :'HH:mm'}}</p>
       <p *ngIf="gira.closedEvent == false">
         <!-- <a class="btn btn-secondary"  href="#">Inscreva-se &raquo;</a> -->
-        <button *ngIf="gira.registrationsClosed == false && gira.registrationPeriod && (gira.acceptCleanse === true || gira.acceptConsultation === true || gira.acceptWatcher === true)" class="btn btn-secondary custom-text" [routerLink]="['/application', gira.id]">Inscreva-se &raquo;</button>
+        <button *ngIf="gira.registrationsClosed == false && gira.registrationPeriod && (gira.acceptCleanse === true || gira.acceptConsultation === true || gira.acceptWatcher === true)" class="btn btn-secondary btn-sm custom-text" [routerLink]="['/application', gira.id]">
+          Inscreva-se
+        </button>
       </p>
       <div *ngIf="gira.registrationsClosed && gira.closedEvent == false" class="alert alert-warning text-center" role="alert">
         <p class="mb-0 custom-text">Inscrições encerradas </p>

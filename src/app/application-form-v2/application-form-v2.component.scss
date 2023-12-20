@@ -164,3 +164,22 @@
     font-family: Barlow;
     font-weight: 400;
   }
+
+  @media (max-width: 767px) {
+    .back-button {
+      margin-top: 10%; /* Adjust the margin-top for phones */
+    }
+  }
+  
+  /* Media query for devices with a minimum width of 768px (typical for desktops) */
+  @media (min-width: 768px) and (max-width: 991px) {
+    .back-button {
+      margin-top: 8%; /* Adjust the margin-top for desktops */
+    }
+  }
+
+  @media (min-width: 992px) {
+    .back-button {
+      margin-top: 6%; /* Adjust the margin-top for desktops */
+    }
+  }
