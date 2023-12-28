@@ -176,3 +176,24 @@ body {
     font-family: Barlow;
     font-weight: 400;
   }
+
+  @media (max-width: 767px) {
+    .top-section {
+      margin-top: 5%; /* Adjust the margin-top for phones */
+      padding-bottom: 1rem;
+    }
+  }
+  
+  /* Media query for devices with a minimum width of 768px (typical for desktops) */
+  @media (min-width: 768px) and (max-width: 991px) {
+    .top-section {
+      margin-top: 5%; /* Adjust the margin-top for desktops */
+      padding-bottom: 1rem;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .top-section {
+      margin-top: 0%; /* Adjust the margin-top for desktops */
+    }
+  }
