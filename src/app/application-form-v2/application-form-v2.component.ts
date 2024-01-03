@@ -107,8 +107,14 @@ export class ApplicationFormV2Component implements OnInit {
       this.errors.push('Informe o seu nome.');
     }
 
-    if(this.applicationForm.get('email')!.value == ''){
+    if(this.applicationForm.get('email')!.value == '' || 
+      this.applicationForm.get('email')!.value == null || 
+      this.applicationForm.get('email')!.value == undefined){
       this.errors.push('Informe o seu email.');
+    } else{
+      if(!this.isEmailValid(this.applicationForm.get('email')!.value!)){
+        this.errors.push('Informe um email válido.');
+      }
     }
 
     if(this.applicationForm.get('typeOfService')!.value !== '1' &&
@@ -188,4 +194,11 @@ export class ApplicationFormV2Component implements OnInit {
     return this.datePipe.transform(new Date(), 'yyyy');
   }
 
+  isEmailValid(email: string): boolean {
+    // Regular expression for a simple email validation
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  
+    // Check if the input value matches the email pattern
+    return emailRegex.test(email);
+  }
 }
