@@ -73,9 +73,8 @@
                 <input type="text" class="form-control" formControlName="phoneNumber"/>
               </div>
   
-              <div class="col-12">
+              <!-- <div class="col-12">
                 <label for="address" class="form-label custom-text">Vai acompanhado? <span class="text-body-secondary"><a (click)="openAddCompanion()" href="javascript:void(0)">Clique aqui para informar o nome do(s) acompanhante(s)</a></span></label>
-                
                 <table class="table table-hover custom-text" *ngIf="companions.length > 0">
                     <thead>
                         <tr>
@@ -96,12 +95,11 @@
                         </tr>
                       </tbody>
                   </table>
-
-              </div> 
+              </div> -->
   
               <div class="col-12">
-                <label for="address" class="form-label custom-text">Alguma observação adicional?</label>
-                <textarea class="form-control" formControlName="observation" rows="2"></textarea>
+                <label for="address" class="form-label custom-text">Alguma observação adicional? <span class="text-body-secondary custom-text">(Opcional) {{ characterCount }}/1500 </span></label>
+                <textarea [ngClass]="{'observation-error': isObservationTooLong}" class="form-control" formControlName="observation" rows="2"></textarea>
               </div>
   
             </div>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { GiraService } from '../gira.service';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { ApplicationFormCompanionComponent } from '../application-form-companion/application-form-companion.component';
 import { ToastService } from '../toast.service';
 import { DatePipe } from '@angular/common';
@@ -127,6 +127,11 @@ export class ApplicationFormV2Component implements OnInit {
       this.errors.push('Você precisa concordar com a Política de Privacidade, os Termos de Uso e os Termos de Serviço.');
     }
 
+    const observationValue = this.applicationForm.get('observation')!.value
+    if (observationValue !== null && observationValue.length > 1500){
+      this.errors.push('O campo observação não pode ter mais do que 1.500 caracteres.');
+    }
+
     if(this.applicationForm.get('consentReceiveNews')!.value !== true){
       this.applicationForm.get('consentReceiveNews')!.setValue(false);
     }
@@ -200,5 +205,19 @@ export class ApplicationFormV2Component implements OnInit {
   
     // Check if the input value matches the email pattern
     return emailRegex.test(email);
+  }
+
+  get observationControl() {
+    return this.applicationForm.get('observation') as FormControl;
+  }
+
+  get characterCount() {
+    const observationValue = this.observationControl.value;
+    return observationValue ? observationValue.length : 0;
+  }
+
+  get isObservationTooLong(): boolean {
+    const observationValue = this.applicationForm.get('observation')!.value;
+    return observationValue !== null && observationValue.length > 1500;
   }
 }

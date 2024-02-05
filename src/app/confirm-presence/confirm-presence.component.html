@@ -37,9 +37,9 @@
         </div>
 
         <div *ngIf="application?.approved === true" class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light custom-title" style="font-size: 2rem;">Inscrição para gira do dia {{application?.gira?.startDate | date :'dd/MM HH:mm'}}</h1>
+            <h1 class="fw-light custom-title" style="font-size: 2rem;">Inscrição para {{application?.gira?.name}} do dia {{application?.gira?.startDate | date :'dd/MM HH:mm'}}</h1>
             <p class="lead text-body-secondary custom-text">
-                Olá <b>{{application?.name}}</b>! A sua inscrição para {{application?.gira?.name}} está <b>Aprovada</b>.
+                Olá <b>{{application?.name}}</b>! A sua inscrição está <b>Aprovada</b>.
             </p>
             <p>
             <p class="lead text-body-secondary custom-text">
@@ -55,18 +55,28 @@
         </div>
 
         <div *ngIf="application?.approved === false && application?.cancelledByUser === false" class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light custom-title" style="font-size: 2rem;">Inscrição para gira do dia {{application?.gira?.startDate | date :'dd/MM HH:mm'}}</h1>
+            <h1 class="fw-light custom-title" style="font-size: 2rem;">Inscrição para {{application?.gira?.name}} do dia {{application?.gira?.startDate | date :'dd/MM HH:mm'}}</h1>
             <p class="lead text-body-secondary custom-text">
-                Olá <b>{{application?.name}}</b>! Pedimos desculpas, mas a sua inscrição para {{application?.gira?.name}} <b>não foi provada</b> devido a lotação maxima do espaço.</p>
+                Olá <b>{{application?.name}}</b>! Pedimos desculpas, mas a sua inscrição <b>não foi provada</b> devido a lotação maxima do espaço.</p>
+            <p>
+            <p>
+            </p>
+        </div>
+        
+
+        <div *ngIf="application?.approved === false && application?.cancelledByUser === true" class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light custom-title" style="font-size: 2rem;">Inscrição para {{application?.gira?.name}} do dia {{application?.gira?.startDate | date :'dd/MM HH:mm'}}</h1>
+            <p class="lead text-body-secondary custom-text">
+                Olá <b>{{application?.name}}</b>! Conforme solicitado, a sua inscrição está <b>cancelada</b>.</p>
             <p>
             <p>
             </p>
         </div>
 
-        <div *ngIf="application?.approved === false && application?.cancelledByUser === true" class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light custom-title" style="font-size: 2rem;">Inscrição para gira do dia {{application?.gira?.startDate | date :'dd/MM HH:mm'}}</h1>
+        <div *ngIf="application?.approved === false && application?.invalidInscription === true" class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light custom-title" style="font-size: 2rem;">Inscrição para {{application?.gira?.name}} do dia {{application?.gira?.startDate | date :'dd/MM HH:mm'}}</h1>
             <p class="lead text-body-secondary custom-text">
-                Olá <b>{{application?.name}}</b>! Conforme solicitado, a sua inscrição para {{application?.gira?.name}} está <b>cancelada</b>.</p>
+                Olá <b>{{application?.name}}</b>! Recebemos o seu pedido, mas não o conseguimos validar sem estar corretamente preenchido. A inscrição está <b>cancelada</b>.</p>
             <p>
             <p>
             </p>

@@ -15,6 +15,7 @@ export interface Application {
     approvedAt?: Date;
     approved?: boolean;
     cancelledByUser?: boolean;
+    invalidInscription?: boolean;
     numberOfCompanions: number;
     listCompanions: ApplicationForm[]
   }
