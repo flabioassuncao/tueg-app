@@ -31,6 +31,7 @@
             "assets": [
               "src/favicon.ico",
               "src/tueg.ico",
+              "src/tuegico.ico",
               "src/assets"
             ],
             "styles": [
